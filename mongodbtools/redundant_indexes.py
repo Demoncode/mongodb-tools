@@ -53,7 +53,8 @@ def get_connection(host, port, username, password):
     mongoURI = "mongodb://" + userPass + host + ":" + str(port)
     return Connection(host=mongoURI, read_preference=ReadPreference.SECONDARY)
 
-def main(options):
+def main():
+    options = get_cli_options()
     connection = get_connection(options.host, options.port, options.user, options.password)
 
     def compute_signature(index):
@@ -94,5 +95,4 @@ def main(options):
         report_redundant_indexes(connection[db])
 
 if __name__ == "__main__":
-    options = get_cli_options()
-    main(options)
+    main()
